@@ -1,0 +1,590 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html class="no-js objectfit object-fit">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+
+  <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+              ___          ___         ___          ___          ___          ___      ___
+      ___    /__/\        /  /\       /  /\        /  /\        /  /\        /  /\    /  /\        ___
+     /  /\   \  \:\      /  /::\     /  /:/_      /  /:/_      /  /:/_      /  /::\  /  /::\      /  /\
+    /  /:/    \__\:\    /  /:/\:\   /  /:/ /\    /  /:/ /\    /  /:/ /\    /  /:/\:\/  /:/\:\    /  /:/
+   /  /:/ ___ /  /::\  /  /:/~/:/  /  /:/ /:/_  /  /:/ /:/_  /  /:/ /::\  /  /:/~/:/  /:/  \:\  /  /:/
+  /  /::\/__/\  /:/\:\/__/:/ /:/__/__/:/ /:/ /\/__/:/ /:/ /\/__/:/ /:/\:\/__/:/ /:/__/:/ \__\:\/  /::\
+ /__/:/\:\  \:\/:/__\/\  \:\/:::::|  \:\/:/ /:/\  \:\/:/ /:/\  \:\/:/~/:/\  \:\/:/\  \:\ /  /:/__/:/\:\
+ \__\/  \:\  \::/      \  \::/~~~~ \  \::/ /:/  \  \::/ /:/  \  \::/ /:/  \  \::/  \  \:\  /:/\__\/  \:\
+      \  \:\  \:\       \  \:\      \  \:\/:/    \  \:\/:/    \__\/ /:/    \  \:\   \  \:\/:/      \  \:\
+       \__\/\  \:\       \  \:\      \  \::/      \  \::/       /__/:/      \  \:\   \  \::/        \__\/
+             \__\/        \__\/       \__\/        \__\/        \__\/        \__\/    \__\/
+
+
+
+      This framework and functionality is based on this: https://github.com/vlandham/scroll_demo
+      For a full rundown of the theory behind it, see: http://vallandingham.me/scroller.html
+      We have tweaked to make it populoate more dynamically, and include interactive goodies like
+      WebGL, SVG, etc. in the <vis> div created for the original interactive it was intended for.
+
+     |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||| Facebook Sharing Content |||||||||||||||||||||||||||||||||||| -->
+
+  <meta property="og:title" content="Improving Mobility Without Building More Lanes">
+  <meta property="og:site_name" content="Southwest Energy Efficiency Project">
+  <meta property="og:url" content="http://swenergy.org/">
+  <meta property="og:description" content="What if there was a way to increase mobility on an existing road, and improve transit and other options, without needing more public funds? This sounds like magic, but it really just requires a smart approach to using market forces to optimize the use of our existing highway lanes.">
+  <meta property="fb:app_id" content="">
+  <meta property="og:type" content="website"> 
+
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- ||||||||||||||| Twitter Sharing Content |||||||||||||||||||||| -->
+
+<meta name="twitter:card" content="Southwest Energy Efficiency Project: Improving Mobility Without Building More Lanes." />
+  <meta name="twitter:site" content="http://www.swenergy.org" />
+  <meta name="twitter:creator" content="@southwestee" />
+  <meta property="og:image" content="assets/images/bkg/sweep01.png" />
+
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+  <meta name="Description" content="What if there was a way to increase mobility on an existing road, and improve transit and other options, without needing more public funds? This sounds like magic, but it really just requires a smart approach to using market forces to optimize the use of our existing highway lanes.">
+
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+  <title>Southwest Energy Efficiency Project – Improving Mobility Without Building More Lanes</title>
+
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/scrolly_sweep.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/step_sweep.css">
+    <script src="assets/css/demo-styles.css.js"></script>
+  <script type="text/javascript" src="assets/js/modernizr.min.js"></script>
+  <script type="text/javascript" src="assets/js/content_sweep.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link href="assets/css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
+
+</head>
+
+
+
+<body>
+
+
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||| SITE FURNITURE |||||||||||||||||||||||||||| -->
+
+<a name="topski"></a>
+
+
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||  LOADER |||||||||||||||||||||||||||||||||||| -->
+
+  <div id="play">
+            <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--reversed" data-buffer="true" style="top:50%; ">
+              <div class="mdc-linear-progress__buffering-dots"></div>
+              <div class="mdc-linear-progress__buffer"></div>
+              <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="display:none !important;visibility:hidden !important; ">
+                <span class="mdc-linear-progress__bar-inner"></span>
+              </div>
+              <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                <span class="mdc-linear-progress__bar-inner"></span>
+              </div>
+            </div>
+    
+    <span class="org" style="color:#fff;top:47%;right:1%; position:absolute; display:block; ">Southwest Energy Efficiency Project</span>
+    
+    
+  </div>
+  
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||| BOTTOM LEFT DIV ||||||||||||||||||||||||||||||||| -->
+  <div id="output" style="visibility:none; ">
+  <!-- 
+   <div id="fnA" style="display:none; "><span class='footnotenumberr'>2</span> Texas A&M Transportation Institute. 2015.  <a href="https://mobility.tamu.edu/ums/">Annual Urban Mobility Scorecard.</a></div>
+    <div id="fnB" style="display:none; "><span class='footnotenumberr'>3</span> Colorado State Demography Office. 2017.  <a href="https://demography.dola.colorado.gov/population/population-totals-colorado-substate/#population-totals-for-">Population Forecasts.</a></div>
+    <div id="fnC" style="display:none; "><span class='footnotenumberr'>4</span> Federal Highway Administration. Highway Statistics. 1993 and 2015. <a href="https://www.fhwa.dot.gov/policyinformation/statistics.cfm">Table SF-1 Motor Fuel Taxes.</a> and US Inflation Calculator. 2017. <a href="http://www.usinflationcalculator.com/">Inflation Calculator.</a></div>
+    <div id="fnD" style="display:none; "><span class='footnotenumberr'>5</span> Volume/Capacity Ratio data was obtained for the entire corridor from CDOT.</div>
+    -->
+  </div>
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||| TOOLBAR  |||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+
+    <div class="mdc-toolbar mdc-toolbar--fixed" style="background-color: #fff;" id="logobar">
+      <div class="mdc-toolbar__row">
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+          <button class="demo-menu material-icons mdc-toolbar__icon--menu">menu</button>
+<a href="#"><img src="https://cultureondemand.github.io/sweep-report/assets/images/sweep.png" border="0" alt="Southwest Energy Efficiency Project" style="height:33px;margin-top: 3px;background-color:#fff !important; "></a>          
+<span class="mdc-toolbar__title">Improving Mobility Without Building More Lanes</span>
+
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
+          <div class="mdc-menu-anchor">
+          <a href="assets/sweep_improving_mobility_wout_more_lanes.pdf" class="material-icons mdc-toolbar__icon" aria-label="Download" alt="Download" id="downloadA">file_download</a>
+          <a class="material-icons mdc-toolbar__icon toggle" aria-label="Bookmark this page" alt="Bookmark this page">more_vert</a>
+          <div class="mdc-simple-menu" tabindex="-1" id="demo-menu">
+            <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true" style="transform: scale(1, 1);">
+
+              <li class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.069s;" onclick="window.open('https://www.facebook.com/SWenergyefficiency/')">Facebook</li>
+              <li class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.124s;" onclick="window.open('https://twitter.com/southwestee')">Twitter</li>
+              <li class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.179s;" onclick="window.open('https://www.linkedin.com/company/southwest-energy-efficiency-project')">LinkedIn</li>
+              
+              <li class="mdc-list-divider" role="separator"></li>
+              <li class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.236s;" onclick="window.open('assets/sweep_improving_mobility_wout_more_lanes.pdf')">Download</li>
+              <li class="mdc-list-divider" role="separator"></li>
+              <li class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.236s;" onclick="window.open('http://visitor.constantcontact.com/manage/optin?v=001BdwJNcIEVThaZiyQutpx1eC5nDFbc7FT')">Join Our Mailing List</li>
+
+            </ul>
+          </div>
+          </div>
+        
+
+        </section>
+      </div>
+    </div>
+ 
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||| Drawer  ||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+
+  <aside class="mdc-temporary-drawer">
+      <nav class="mdc-temporary-drawer__drawer">
+        <header class="mdc-temporary-drawer__header">
+          <div class="mdc-temporary-drawer__header-content mdc-theme--primary-bg mdc-theme--text-primary-on-primary" style="background-color: #fff !important; ">
+          <a href="#" style="background-color: none; background: none; "><img src="https://cultureondemand.github.io/sweep-report/assets/images/sweepstackedlogo.jpg" border="0" alt="Southwest Energy Efficiency Project" style="max-width:180px; "></a>
+ 
+          </div>
+        </header>
+        <nav class="mdc-temporary-drawer__content mdc-list-group">
+          <div id="icon-with-text-demo" class="mdc-list">
+
+
+                  <li><a href="#step-0" class="mdc-list-item">Introduction</a></li>
+        <li><a href="#step-1" class="mdc-list-item">High-occupancy toll (HOT) lanes</a></li>
+        <li><a href="#step-2" class="mdc-list-item">Benefits of HOT conversion</a></li>
+        <li><a href="#step-3" class="mdc-list-item">Annual Hours of Delay, Denver-Aurora</a></li>
+        <li><a href="#step-4" class="mdc-list-item">Colorado Population, 2000-2050</a></li>
+        <li><a href="#step-5" class="mdc-list-item">Colorado State Motor Fuel Taxes in Real Dollars</a></li>
+        <li><a href="#step-6" class="mdc-list-item">Managed Lanes and Interstate Expansion Costs in the Denver Metro Area</a></li>
+        <li><a href="#step-7" class="mdc-list-item"> Congestion on the T-REX Corridor</a></li>
+        <li><a href="#step-8" class="mdc-list-item">Download the Report</a></li>
+ 
+
+
+
+          </div>
+        </nav>
+      </nav>
+    </aside>
+  
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||| closing slide fixed content  |||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+<div id="titleCloser">
+Southwest Energy Efficiency Project. 
+</div>
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||cover top left menu ||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+<div id="covermenu">
+<button class="title-menu material-icons mdc-toolbar__icon--menu">menu</button>
+</div>
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||| cover top right logos ||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+<div id="covertools">
+
+          <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
+          <div class="mdc-menu-anchor">
+          <a href="assets/sweep_improving_mobility_wout_more_lanes.pdf" class="material-icons mdc-toolbar__icon" aria-label="Download" alt="Download" style="color:#fff !important; background-color:transparent !important; " id="downloadB">file_download</a>
+          <a class="material-icons mdc-toolbar__icon toggle" aria-label="Bookmark this page" alt="Bookmark this page" id="toggleon">more_vert</a>
+          <div class="mdc-simple-menu" tabindex="-1" id="demo-menuo">
+            <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true" style="transform: scale(1, 1);">
+
+              <li class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.069s;" onclick="window.open('https://www.facebook.com/SWenergyefficiency/')">Facebook</li>
+              <li class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.124s;" onclick="window.open('https://twitter.com/southwestee')">Twitter</li>
+              <li class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.179s;" onclick="window.open('https://www.linkedin.com/company/southwest-energy-efficiency-project')">LinkedIn</li>
+              
+              <li class="mdc-list-divider" role="separator"></li>
+              <li class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.236s;" onclick="window.open('assets/sweep_improving_mobility_wout_more_lanes.pdf')">Download</li>
+              <li class="mdc-list-divider" role="separator"></li>
+              <li class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.236s;" onclick="window.open('http://visitor.constantcontact.com/manage/optin?v=001BdwJNcIEVThaZiyQutpx1eC5nDFbc7FT')">Join Our Mailing List</li>
+   </ul>
+          </div>
+          </div>
+        </section>
+
+</div>
+
+
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||| TABLE OF CONTENTS  (old deactivated) |||||||||||| -->
+  
+  <div id="toc"></div>
+  
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||| This is where the content lives ||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||| Main container div |||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||| mama container||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  
+  <div class="container" id="container">
+
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||| Graphic div is the parent for scrolling ||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+    
+    <div id="graphic">
+
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||| Containers have bgs and top bars |||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- ||||| Section contains steps which are the scrolling text |||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- |||||||||||||||||| holds the steps/pages|||||||||||||||||||||| -->
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  
+      <div id="sections">
+
+
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||||   1st slide |||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||| add a static step container ||||||||||||||||||||| -->
+        <!-- |||||||||||| the title slide with scroll prompt |||||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+
+        <!-- ### 0 ### -->
+<section class="step" style="background: none !important; visibility:visible; ">
+  <div id="logoOpener" style="display:inline-block; ">
+    <div class="imgcontainer">
+      <a href="#" style="background-color: none; background: none; "><img src="https://cultureondemand.github.io/sweep-report/assets/images/sweep.png" width="90%" border="0" alt="Southwest Energy Efficiency Project" style="max-width:180px;"></a>
+    <span class="org">Southwest Energy Efficiency Project</span>
+    </div>
+  </div>
+
+  <div class="tagblues"></div>
+
+    <div class="bgbg js-background-image">
+      <picture>
+        <!--[if IE 9]><video style="display: none;"><![endif]-->
+        <source srcset="assets/images/bkg/sweep01.png" media="(min-width: 400px)">
+        <!--[if IE 9]></video><![endif]-->
+        <img srcset="assets/images/bkg/sweep01.png">
+      </picture>
+    </div>          
+  <div id="titleOpener">
+    <span class="grandtitle">Improving Mobility Without Building More Lanes</span>
+   <div class="subline">By Mike Salisbury and Will Toor</div>
+ </div>
+         <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <span id="scrollimg">
+            <a href="#step-0" style="background: none !important; z-index: 9999999; ">
+              <img src="assets/images/scrolldown.png" border="0" alt="Scroll Down For More" style="text-align: center; ">
+            </a>
+          </span>
+        </section>
+
+
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||| OUTPUT THE REST OF THE STEPS |||||||||||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||| FIND THE CONTENT IN content.js |||||||||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||| CALCULATES ARRAY OF TITLES FOR OUTPUT ||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||| start noscript version of js output ||||||||||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+        <noscript>
+
+          
+
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||| OUTPUT THE REST OF THE STEPS |||||||||||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||| FIND THE CONTENT IN content.js |||||||||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||| CALCULATES ARRAY OF TITLES FOR OUTPUT ||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+                    
+          
+        </noscript>
+
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- ||||||||| end noscript          |||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+        <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+      </div>
+      
+      <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+      <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+      <!-- ||||||||||||| end sections ||||||||||||||||||||||||||||||||||| -->
+      <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+      <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+      <!-- |||||||||||| The vis div that holds interactive goodies if there are any |||||| -->
+      <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+      <div id="vis" style="display:none; "></div>
+
+      <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+      <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+      <!-- |||||||||||| Close container and graphic ||||||||||||||||||||| -->
+
+    </div>
+  </div>
+      <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+      <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+  <script src="//d3js.org/d3.v3.min.js"></script>
+  <script src="//d3js.org/topojson.v1.min.js"></script>
+  <script type="text/javascript" src="assets/js/picturefill.min.js"></script>
+  <script type="text/javascript" src="assets/js/background-picture.js"></script>
+  <script type="text/javascript" src="assets/js/queue.js"></script>
+  <script type="text/javascript" src="assets/js/scroller.js"></script>
+  <script type="text/javascript" src="assets/js/toggle.js"></script>
+  <script type="text/javascript" src="assets/js/preload.js"></script>
+  <script type="text/javascript" src="assets/js/slide.js"></script>
+ <!-- ### <script type="text/javascript" src="assets/js/table-of-contents.js"></script> ### -->
+  <script type="text/javascript" src="assets/js/main.js"></script>
+
+
+
+  <script src="assets/js/scrolly_sweep.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| Preloader ||||||||||||||||||||||||||||||||||||||| -->
+
+<div class="hidden">
+  <script type="text/javascript">
+ 
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+ 
+      var images = new Array()
+      function preload() {
+        for (i = 0; i < preload.arguments.length; i++) {
+          images[i] = new Image()
+          images[i].src = preload.arguments[i]
+        }
+        
+
+      }
+
+
+
+images.onload = notify();
+
+      function notify()  {
+
+        setTimeout(function(){ 
+
+          document.getElementById('play').style.display = 'none'; 
+ 
+ 
+        }, 3000);
+       
+}
+
+      preload(
+        "assets/images/bkg/1-Cover-large.jpg",
+        "assets/images/bkg/2-Intro-large.jpg"
+      )
+     
+  </script>
+</div>
+
+ 
+
+
+
+
+    <script src="assets/js/material-components-web.js"></script>
+    
+
+
+
+    <script>
+      var drawerEl = document.querySelector('.mdc-temporary-drawer');
+      var MDCTemporaryDrawer = mdc.drawer.MDCTemporaryDrawer;
+      var drawer = new MDCTemporaryDrawer(drawerEl);
+       document.querySelector('.demo-menu').addEventListener('click', function() {
+        drawer.open = true;
+      });
+      drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {
+        console.log('Received MDCTemporaryDrawer:open');
+      });
+      drawerEl.addEventListener('MDCTemporaryDrawer:close', function() {
+        console.log('Received MDCTemporaryDrawer:close');
+      });
+
+
+    </script>
+
+
+    <script>
+
+
+      var drawerElo = document.querySelector('.mdc-temporary-drawer');
+      var MDCTemporaryDrawero = mdc.drawer.MDCTemporaryDrawero;
+      var drawero = new MDCTemporaryDrawer(drawerElo);
+      document.querySelector('.title-menu').addEventListener('click', function() {
+        drawero.open = true;
+      });
+      drawerElo.addEventListener('MDCTemporaryDrawero:open', function() {
+        console.log('Received MDCTemporaryDrawero:open');
+      });
+      drawerElo.addEventListener('MDCTemporaryDrawero:close', function() {
+        console.log('Received MDCTemporaryDrawero:close');
+      });
+
+
+
+
+    </script>
+
+
+    <script>
+      var menuEl = document.querySelector('#demo-menu');
+      var menu = new mdc.menu.MDCSimpleMenu(menuEl);
+      var toggle = document.querySelector('.toggle');
+      toggle.addEventListener('click', function() {
+        menu.open = !menu.open;
+      });
+    </script>
+
+  
+
+    <script>
+      var menuElo = document.querySelector('#demo-menuo');
+      var menuo = new mdc.menu.MDCSimpleMenu(menuElo);
+      var toggleo = document.querySelector('#toggleon');
+      toggleo.addEventListener('click', function() {
+        menuo.open = !menuo.open;
+      });
+    </script>  
+
+
+
+    <script>
+      // Because we load our CSS via webpack, we need to ensure that all of the correct styles
+      // are applied before ripples are attached. Otherwise, ripples may use the computed styles of
+      // elements before our CSS is applied, leading to improper UX.
+      (function() {
+        var pollId = 0;
+        pollId = setInterval(function() {
+          var pos = getComputedStyle(document.querySelector('.mdc-button')).position;
+          if (pos === 'relative') {
+            init();
+            clearInterval(pollId);
+          }
+        }, 250);
+        function init() {
+          var btns = document.querySelectorAll('.mdc-button:not([data-demo-no-js])');
+          for (var i = 0, btn; btn = btns[i]; i++) {
+            mdc.ripple.MDCRipple.attachTo(btn);
+          }
+        }
+
+ 
+
+      })();
+    </script>
+
+
+
+    <script>
+      var determinates = document.querySelectorAll('.mdc-linear-progress');
+      for (var i = 0, determinate; determinate = determinates[i]; i++) {
+        var linearProgress = mdc.linearProgress.MDCLinearProgress.attachTo(determinate);
+        linearProgress.progress = 0.5;
+        if (determinate.dataset.buffer) {
+          linearProgress.buffer = 0.19;
+        }
+      }
+    </script>
+
+
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-41639560-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-41639560-1');
+</script>
+
+
+
+
+
+</body>
+
+
+</html>
