@@ -470,7 +470,6 @@ polyline {
   left: 0;
   border-top: 0;
   text-transform: uppercase;
-  margin: 0;
   background-color: rgba(0, 0, 0, .8);
   font-family: "HelveticaNeueLight",
     "HelveticaNeue-Light",
@@ -486,11 +485,12 @@ polyline {
   font-size: .7em;
   font-weight: 800;
   text-align: left;
-  padding-top: 1.3em;
+/*  padding-top: 1.3em;
   padding-bottom: 1.3em;
   padding-right: .9em;
   padding-left: 2.3em;
   margin-left: 13em;
+	*/
   cursor: pointer;
     height: 40px;
 
