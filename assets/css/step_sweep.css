@@ -7,7 +7,7 @@
 
 .step {
 
-  background-color: #fff;
+ /* background-color: #fff; */
    transition: all .01s ease;
   -webkit-transition:all .01s ease;
 
