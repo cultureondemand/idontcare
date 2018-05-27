@@ -18,13 +18,15 @@
 
 
 .step-content {
-  max-width: 420px;  
+  max-width: 20px;  
+/*  
   min-width: 280px;  
-  width:20em;
   margin-left: 7.4em;
-   background-color: #fff;
+  width:20em;
+  */
+   background-color: #0ff000;
   position: relative;
-  padding: 1.5em;
+  padding: 1.05em;
   z-index: 2;
 }
 
