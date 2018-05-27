@@ -115,7 +115,7 @@
     Slide.prototype.initialize = function(config) {
     this.id = config.id;
     this.slide = createSlide(config.id);
-    this.bkg = createBkg(config.data.bkgImage);
+   //////// this.bkg = createBkg(config.data.bkgImage);
     this.sectionHeader = createSectionHeader(config.id, config.data.section);
     this.header = createHeader(config.data.header);
     this.body = createBody(config.data.body);
