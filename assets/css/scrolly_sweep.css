@@ -470,7 +470,7 @@ polyline {
   left: 0;
   border-top: 0;
   text-transform: uppercase;
-  background-color: rgba(0, 0, 0, .8);
+  background-color: rgba(0, 0, 0, 0);
   font-family: "HelveticaNeueLight",
     "HelveticaNeue-Light",
     "Helvetica Neue Light",
