@@ -84,6 +84,7 @@
   function createBkg(bkgImage) {
     var node = document.createElement("div");
     node.className = "bgbg js-background-image";
+    /*
     var innerHTML =
       "<picture>" +
       '<!--[if IE 9]><video style="display: none;"><![endif]-->' +
@@ -97,6 +98,7 @@
       "</picture>";
     // node.style.backgroundImage = "url(assets/images/bkg/" + id + ".jpg)";
     node.innerHTML = innerHTML;
+    */
     return node;
   }
 
@@ -115,7 +117,7 @@
     Slide.prototype.initialize = function(config) {
     this.id = config.id;
     this.slide = createSlide(config.id);
-   //////// this.bkg = createBkg(config.data.bkgImage);
+    this.bkg = createBkg(config.data.bkgImage);
     this.sectionHeader = createSectionHeader(config.id, config.data.section);
     this.header = createHeader(config.data.header);
     this.body = createBody(config.data.body);
