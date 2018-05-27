@@ -8,6 +8,7 @@
 .step {
 
  /* background-color: #fff; */
+  width:90px;
    transition: all .01s ease;
   -webkit-transition:all .01s ease;
 
